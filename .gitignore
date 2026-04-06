@@ -1,0 +1,26 @@
+# Common
+node_modules/
+.DS_Store
+dist/
+dist-ssr/
+*.local
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Bot specific
+bot/node_modules/
+bot/.env
+
+# Web specific
+web/node_modules/
+web/dist/
+web/.env
+web/.env.*
