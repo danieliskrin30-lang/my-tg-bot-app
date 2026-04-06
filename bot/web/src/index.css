@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
+:root {
+  --journey-bg: #0A0510;
+  --journey-bg-light: #140A20;
+  --text-primary: #E8E0F0;
+  --text-secondary: rgba(232, 224, 240, 0.5);
+  --gold: #FFD700;
+  --gold-dim: rgba(255, 215, 0, 0.4);
+  --teal: #40E0D0;
+  --magenta: #FF6B9D;
+  --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+  --font-main: 'Cormorant Garamond', 'Georgia', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--journey-bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 28px 18px;
+  position: relative;
+  background: radial-gradient(ellipse at 50% 0%, var(--journey-bg-light) 0%, var(--journey-bg) 60%);
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes particleDrift {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-200px) translateX(30px) scale(0.5); opacity: 0; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes titleBreathe {
+  0%, 100% { text-shadow: 0 0 10px rgba(255, 215, 0, 0.3), 0 0 30px rgba(255, 215, 0, 0.1); }
+  50% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 50px rgba(255, 215, 0, 0.2); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* ===== TEXT GLOW ===== */
+
+.text-gold {
+  color: var(--gold);
+  text-shadow: 0 0 6px var(--gold-dim), 0 0 14px rgba(255, 215, 0, 0.15);
+}
+
+.text-glow-soft {
+  text-shadow: 0 0 8px currentColor, 0 0 20px rgba(232, 224, 240, 0.1);
+}
