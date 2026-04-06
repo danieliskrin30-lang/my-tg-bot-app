@@ -1,3 +1,35 @@
+/* ===== LOADING SCREEN ===== */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #0A0510;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.loading-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.loading-icon {
+  font-size: 3rem;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+}
+
+.loading-text {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(232, 224, 240, 0.5);
+}
+
 /* ===== WELCOME SCREEN ===== */
 
 .welcome-screen {

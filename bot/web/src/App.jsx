@@ -13,12 +13,16 @@ import './App.css';
 const bgMusic = new Howl({
   src: ['/assets/audio/ambient.mp3'],
   loop: true,
-  volume: 0.3
+  volume: 0.3,
+  preload: true,
+  html5: true
 });
 
 const clickSfx = new Howl({
   src: ['/assets/audio/click.mp3'],
-  volume: 0.5
+  volume: 0.5,
+  preload: true,
+  html5: true
 });
 
 /* =================== STORY SCRIPT =================== */
@@ -117,6 +121,7 @@ const storyScript = {
 };
 
 function App() {
+  const [isAppReady, setIsAppReady] = useState(false);
   const [screen, setScreen] = useState('welcome');
   const [selected, setSelected] = useState(null);
   const [user, setUser] = useState(null);
@@ -149,7 +154,35 @@ function App() {
       setSelected(JSON.parse(saved));
       setScreen('selected');
     }
+
+    /* === PRELOAD ASSETS === */
+    preloadAssets();
   }, []);
+
+  const preloadAssets = () => {
+    const imagesToLoad = [
+      '/deer.png',
+      '/fox.png',
+      '/golem.png'
+    ];
+
+    let loaded = 0;
+    const total = imagesToLoad.length;
+
+    imagesToLoad.forEach((src) => {
+      const img = new Image();
+      img.onload = img.onerror = () => {
+        loaded++;
+        if (loaded >= total) {
+          setIsAppReady(true);
+        }
+      };
+      img.src = src;
+    });
+
+    // Fallback: force ready after 3s even if images hang
+    setTimeout(() => setIsAppReady(true), 3000);
+  };
 
   const characters = [
     {
@@ -235,6 +268,22 @@ function App() {
   const pc = profileChar;
 
   const renderCurrentScreen = () => {
+    /* --- LOADING SCREEN --- */
+    if (!isAppReady) {
+      return (
+        <div className="loading-screen">
+          <motion.div
+            className="loading-logo"
+            animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <span className="loading-icon">🍃</span>
+            <span className="loading-text">Загрузка...</span>
+          </motion.div>
+        </div>
+      );
+    }
+
     /* --- DIALOGUE --- */
     if (isStoryActive && selected) {
       const charStory = storyScript[selected.id];
